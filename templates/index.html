@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfluxDB Data Sender</title>
+    <style>
+        table {
+            width: 50%;
+            margin: auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">InfluxDB Data Sender</h1>
+    <form action="/" method="POST">
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+                <th>Post</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="name" required placeholder="CF"></td>
+                <td><input type="number" name="value" required></td>
+                <td><input type="text" name="host" required placeholder="host2"></td>
+            </tr>
+        </table>
+        <div style="text-align: center; margin-top: 20px;">
+            <button type="submit">Send</button>
+        </div>
+    </form>
+</body>
+</html>
