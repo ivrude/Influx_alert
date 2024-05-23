@@ -18,15 +18,17 @@ write_api = client.write_api(write_options=SYNCHRONOUS)
 
 # Запис кожного значення зі списку l у базу даних
 def zapis(name,value):
-    data = f"test_3,host=host4 amount_radiation_{name}={value}"
+    data = f"test_4,host=host3 {name}={value}"
     write_api.write(bucket=bucket, org=org, record=data)
-zapis("AM",0)
-zapis("BA",0)
-zapis("CS",0)
-zapis("CO",0)
-zapis("TH",0)
-zapis("CF",0)
-zapis("PU",0)
+zapis("State_1",2)
+zapis("Current_1",5)
+zapis("State_2",2.05)
+zapis("Current_2",2)
+zapis("State_3",2)
+zapis("Current_3",7)
+zapis("State_4",2.1)
+zapis("Current_4",2.5)
+
 
 # Закриття з'єднання з InfluxDB
 client.close()

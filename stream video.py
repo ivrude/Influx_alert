@@ -21,4 +21,4 @@ def video_feed():
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == '__main__':
-    app.run(host='192.168.0.64', port=8080)
+    app.run(host='192.168.0.15', port=8080)
