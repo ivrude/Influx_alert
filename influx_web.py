@@ -13,7 +13,7 @@ write_api = client.write_api(write_options=ASYNCHRONOUS)
 
 # Функція для запису даних в InfluxDB
 def zapis(name, value, host):
-    data = f"test_3,host={host} amount_radiation_{name}={value}"
+    data = f"test_4,host={host} State_{name}={value}"
     write_api.write(bucket=bucket, org=org, record=data)
 
 @app.route('/', methods=['GET', 'POST'])

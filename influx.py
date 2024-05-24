@@ -20,14 +20,14 @@ write_api = client.write_api(write_options=SYNCHRONOUS)
 def zapis(name,value):
     data = f"test_4,host=host3 {name}={value}"
     write_api.write(bucket=bucket, org=org, record=data)
-zapis("State_1",2)
-zapis("Current_1",5)
-zapis("State_2",2.05)
-zapis("Current_2",2)
-zapis("State_3",2)
-zapis("Current_3",7)
-zapis("State_4",2.1)
-zapis("Current_4",2.5)
+zapis("State_1",2.15)
+zapis("Current_1",4)
+zapis("State_2",2.35)
+zapis("Current_2",6)
+zapis("State_3",2.1)
+zapis("Current_3",2.30)
+zapis("State_4",2.2)
+zapis("Current_4",4.5)
 
 
 # Закриття з'єднання з InfluxDB
