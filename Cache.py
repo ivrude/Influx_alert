@@ -28,7 +28,7 @@ def get_last_record(cursor, table_name):
 
 # Функція для запису даних в InfluxDB або кешування в разі невдачі
 def zapis(name, value, host):
-    data = f"test_4,host={host} {name}={value}"
+    data = f"test_5,host={host} {name}={value}"
     try:
         write_api.write(bucket=bucket, org=org, record=data)
         print(f"Data written to InfluxDB: {name}={value}")
@@ -60,18 +60,18 @@ cursor = conn.cursor()
 tables = ['host1', 'host2', 'host3', 'host4']
 
 # Запис останніх даних з кожної таблиці в InfluxDB
-for table in tables:
-    last_record = get_last_record(cursor, table)
-    if last_record:
-        current_amounts = last_record[:4]
-        state_amounts = last_record[5:]
-        for i, value in enumerate(current_amounts, start=1):
-            zapis(f"current_amount_{i}", value, table)
-        for i, value in enumerate(state_amounts, start=1):
-            zapis(f"state_amount_{i}", value, table)
 
 # Періодична перевірка та повторна відправка кешованих даних
 while True:
+    for table in tables:
+        last_record = get_last_record(cursor, table)
+        if last_record:
+            current_amounts = last_record[:4]
+            state_amounts = last_record[4:8]
+            for i, value in enumerate(current_amounts, start=1):
+                zapis(f"current_amount_{i}", value, table)
+            for i, value in enumerate(state_amounts,start=1):
+                zapis(f"state_amount_{i}", value, table)
     resend_cached_data()
     sleep(60)  # Перевіряємо кожну хвилину
 
