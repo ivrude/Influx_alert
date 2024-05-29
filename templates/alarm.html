@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trigger States</title>
+    <style>
+        body {
+            background-color: #001f3f; /* Чорносиній фон */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px; /* Простір між квадратами */
+        }
+        .square {
+            width: 150px; /* Збільшуємо розмір квадратів */
+            height: 150px; /* Збільшуємо розмір квадратів */
+        }
+        .green {
+            background-color: green;
+        }
+        .yellow {
+            background-color: yellow;
+        }
+        .blue {
+            background-color: blue;
+        }
+        .grey {
+            background-color: grey; /* Колір за замовчуванням, якщо тригерне значення не знайдено */
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: white; text-align: center; width: 100%;">Trigger States for Host1</h1>
+    <div class="container">
+        <div class="square {% if triggers['trigger_1'] == 1 %}green{% elif triggers['trigger_1'] == 2 %}yellow{% elif triggers['trigger_1'] == 3 %}blue{% else %}grey{% endif %}"></div>
+        <div class="square {% if triggers['trigger_3'] == 1 %}green{% elif triggers['trigger_3'] == 2 %}yellow{% elif triggers['trigger_3'] == 3 %}blue{% else %}grey{% endif %}"></div>
+        <div class="square {% if triggers['trigger_2'] == 1 %}green{% elif triggers['trigger_2'] == 2 %}yellow{% elif triggers['trigger_2'] == 3 %}blue{% else %}grey{% endif %}"></div>
+        <div class="square {% if triggers['trigger_4'] == 1 %}green{% elif triggers['trigger_4'] == 2 %}yellow{% elif triggers['trigger_4'] == 3 %}blue{% else %}grey{% endif %}"></div>
+    </div>
+</body>
+</html>
