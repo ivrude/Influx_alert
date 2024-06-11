@@ -29,8 +29,8 @@
         .yellow {
             background-color: yellow;
         }
-        .blue {
-            background-color: blue;
+        .red {
+            background-color: red;
         }
         .grey {
             background-color: grey; /* Колір за замовчуванням, якщо тригерне значення не знайдено */
@@ -38,12 +38,12 @@
     </style>
 </head>
 <body>
-    <h1 style="color: white; text-align: center; width: 100%;">Trigger States for Host1</h1>
+    <h1 style="color: white; text-align: center; width: 100%;">Trigger States for Host3</h1>
     <div class="container">
-        <div class="square {% if triggers['trigger_1'] == 1 %}green{% elif triggers['trigger_1'] == 2 %}yellow{% elif triggers['trigger_1'] == 3 %}blue{% else %}grey{% endif %}"></div>
-        <div class="square {% if triggers['trigger_3'] == 1 %}green{% elif triggers['trigger_3'] == 2 %}yellow{% elif triggers['trigger_3'] == 3 %}blue{% else %}grey{% endif %}"></div>
-        <div class="square {% if triggers['trigger_2'] == 1 %}green{% elif triggers['trigger_2'] == 2 %}yellow{% elif triggers['trigger_2'] == 3 %}blue{% else %}grey{% endif %}"></div>
-        <div class="square {% if triggers['trigger_4'] == 1 %}green{% elif triggers['trigger_4'] == 2 %}yellow{% elif triggers['trigger_4'] == 3 %}blue{% else %}grey{% endif %}"></div>
+        <div class="square {% if triggers['trigger_3'] == 1 %}green{% elif triggers['trigger_3'] == 2 %}yellow{% elif triggers['trigger_3'] == 3 %}red{% else %}grey{% endif %}"></div>
+        <div class="square {% if triggers['trigger_1'] == 1 %}green{% elif triggers['trigger_1'] == 2 %}yellow{% elif triggers['trigger_1'] == 3 %}red{% else %}grey{% endif %}"></div>
+        <div class="square {% if triggers['trigger_2'] == 1 %}green{% elif triggers['trigger_2'] == 2 %}yellow{% elif triggers['trigger_2'] == 3 %}red{% else %}grey{% endif %}"></div>
+        <div class="square {% if triggers['trigger_4'] == 1 %}green{% elif triggers['trigger_4'] == 2 %}yellow{% elif triggers['trigger_4'] == 3 %}red{% else %}grey{% endif %}"></div>
     </div>
 </body>
 </html>

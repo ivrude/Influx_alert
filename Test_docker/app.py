@@ -4,6 +4,7 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 # Функція для отримання останнього запису з таблиці
+# docker run -p 5000:5000 -v "$(pwd)/Test.db:/app/Test.db" flask_app
 def get_last_record(table_name):
     conn = sqlite3.connect('Test.db')
     cursor = conn.cursor()
@@ -43,4 +44,4 @@ def index():
     return render_template('alarm.html', triggers=triggers)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
