@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -42,6 +42,7 @@ def index():
             triggers = {f"trigger_{i}": None for i in range(1, 5)}
 
     return render_template('alarm.html', triggers=triggers)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

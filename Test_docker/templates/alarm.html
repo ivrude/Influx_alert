@@ -2,48 +2,110 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Trigger States</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm Control</title>
     <style>
         body {
-            background-color: #001f3f; /* Чорносиній фон */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+            background-color: #1a1a40; /* Темно-синій фон */
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 20px;
         }
         .container {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            gap: 20px; /* Простір між квадратами */
+            margin-top: 20px;
         }
         .square {
-            width: 150px; /* Збільшуємо розмір квадратів */
-            height: 150px; /* Збільшуємо розмір квадратів */
+            width: 80px;
+            height: 80px;
+            margin: 10px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 14px;
+            color: white;
+            text-align: center;
+            border-radius: 10px;
         }
-        .green {
-            background-color: green;
+        .square span {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            font-size: 12px;
+            font-weight: normal;
         }
-        .yellow {
-            background-color: yellow;
+        .green { background-color: green; }
+        .yellow { background-color: yellow; color: black; }
+        .red { background-color: red; }
+        .grey { background-color: grey; }
+        .button-container {
+            margin-top: 20px;
         }
-        .red {
-            background-color: red;
+        button {
+            padding: 15px 30px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
-        .grey {
-            background-color: grey; /* Колір за замовчуванням, якщо тригерне значення не знайдено */
+        button:hover {
+            background-color: #0056b3;
         }
     </style>
+    <script>
+        function stopMusic() {
+            fetch('http://192.168.0.58:5001/stop', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Music stopped successfully!');
+                } else {
+                    console.log('Failed to stop music.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
 </head>
 <body>
-    <h1 style="color: white; text-align: center; width: 100%;">Trigger States for Host3</h1>
+    <h1>Trigger States for Host3</h1>
+    <div class="button-container">
+        <button onclick="stopMusic()">Stop Music</button>
+    </div>
     <div class="container">
-        <div class="square {% if triggers['trigger_3'] == 1 %}green{% elif triggers['trigger_3'] == 2 %}yellow{% elif triggers['trigger_3'] == 3 %}red{% else %}grey{% endif %}"></div>
-        <div class="square {% if triggers['trigger_1'] == 1 %}green{% elif triggers['trigger_1'] == 2 %}yellow{% elif triggers['trigger_1'] == 3 %}red{% else %}grey{% endif %}"></div>
-        <div class="square {% if triggers['trigger_2'] == 1 %}green{% elif triggers['trigger_2'] == 2 %}yellow{% elif triggers['trigger_2'] == 3 %}red{% else %}grey{% endif %}"></div>
-        <div class="square {% if triggers['trigger_4'] == 1 %}green{% elif triggers['trigger_4'] == 2 %}yellow{% elif triggers['trigger_4'] == 3 %}red{% else %}grey{% endif %}"></div>
+        <div class="square {% if triggers['trigger_1'] == 1 %}green{% elif triggers['trigger_1'] == 2 %}yellow{% elif triggers['trigger_1'] == 3 %}red{% else %}grey{% endif %}">
+            <span>Tg1</span>
+            {% if triggers['trigger_1'] == 1 %}OK{% elif triggers['trigger_1'] == 2 %}Attention{% elif triggers['trigger_1'] == 3 %}Alert{% else %}Unknown{% endif %}
+        </div>
+        <div class="square {% if triggers['trigger_3'] == 1 %}green{% elif triggers['trigger_3'] == 2 %}yellow{% elif triggers['trigger_3'] == 3 %}red{% else %}grey{% endif %}">
+            <span>Tg3</span>
+            {% if triggers['trigger_3'] == 1 %}OK{% elif triggers['trigger_3'] == 2 %}Attention{% elif triggers['trigger_3'] == 3 %}Alert{% else %}Unknown{% endif %}
+        </div>
+        <div class="square {% if triggers['trigger_2'] == 1 %}green{% elif triggers['trigger_2'] == 2 %}yellow{% elif triggers['trigger_2'] == 3 %}red{% else %}grey{% endif %}">
+            <span>Tg2</span>
+            {% if triggers['trigger_2'] == 1 %}OK{% elif triggers['trigger_2'] == 2 %}Attention{% elif triggers['trigger_2'] == 3 %}Alert{% else %}Unknown{% endif %}
+        </div>
+        <div class="square {% if triggers['trigger_4'] == 1 %}green{% elif triggers['trigger_4'] == 2 %}yellow{% elif triggers['trigger_4'] == 3 %}red{% else %}grey{% endif %}">
+            <span>Tg4</span>
+            {% if triggers['trigger_4'] == 1 %}OK{% elif triggers['trigger_4'] == 2 %}Attention{% elif triggers['trigger_4'] == 3 %}Alert{% else %}Unknown{% endif %}
+        </div>
     </div>
 </body>
 </html>
+
