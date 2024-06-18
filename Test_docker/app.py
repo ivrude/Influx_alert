@@ -3,12 +3,13 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
+#app when no connection
 # Функція для отримання останнього запису з таблиці
 # docker run -p 5000:5000 -v "$(pwd)/Test.db:/app/Test.db" flask_app
 def get_last_record(table_name):
     conn = sqlite3.connect('Test.db')
     cursor = conn.cursor()
-    query = f"SELECT * FROM {table_name} ORDER BY rowid DESC LIMIT 1"
+    query = f"SELECT * FROM {table_name}  ORDERBY rowid DESC LIMIT 1"
     cursor.execute(query)
     record = cursor.fetchone()
     conn.close()

@@ -3,6 +3,7 @@ from time import sleep
 from influxdb_client import InfluxDBClient
 from influxdb_client.client.write_api import SYNCHRONOUS
 
+#app for sending status of trigers to influx
 # Задайте ваші параметри підключення
 token = "Xwx1R1lV2_dcGr2AvCDHPoRvpq90n5hlCwutM2Zw3ZQXKzmURxj1q6Vs1BQx9fIiL499NRDpzyZwW0Gv8uGnBA=="
 org = "Chornobyl"

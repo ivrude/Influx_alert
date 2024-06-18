@@ -3,6 +3,7 @@ import pygame
 
 app = Flask(__name__)
 
+#app for alarms webhooks
 def play_music(file_path):
     pygame.init()
     pygame.mixer.init()
@@ -21,7 +22,11 @@ def webhook():
 @app.route('/stop', methods=['POST','GET','OPTIONS'])
 def stop():
     stop_music()
-    return 'Music stopped!'
+    return '''
+        <script>
+            window.close();
+        </script>
+        '''
 
 if __name__ == '__main__':
     app.run(host='192.168.0.58', port=5002, debug=True)
