@@ -29,4 +29,4 @@ def stop():
         '''
 
 if __name__ == '__main__':
-    app.run(host='192.168.0.58', port=5002, debug=True)
+    app.run(host='192.168.0.38', port=5002, debug=True)

@@ -4,12 +4,11 @@ from influxdb_client import InfluxDBClient, Point, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS
 import datetime
 
-#app for sending data to ibflux
 # Параметри підключення до InfluxDB
 token = "Xwx1R1lV2_dcGr2AvCDHPoRvpq90n5hlCwutM2Zw3ZQXKzmURxj1q6Vs1BQx9fIiL499NRDpzyZwW0Gv8uGnBA=="
 org = "Chornobyl"
 bucket = "Graf"
-url = "http://192.168.0.59:8086"
+url = "http://192.168.0.52:8086"
 
 # Ініціалізація клієнта InfluxDB
 client = InfluxDBClient(url=url, token=token, org=org)
@@ -29,14 +28,16 @@ def get_last_record(cursor, table_name):
     return cursor.fetchone()
 
 # Функція для запису даних в InfluxDB або кешування в разі невдачі
-def zapis(name, value, host):
-    data = f"test_5,host={host} {name}={value}"
+def zapis(name, value, host, timestamp=None):
+    if timestamp is None:
+        timestamp = datetime.datetime.utcnow() + datetime.timedelta(hours=3)  # Adjusting for UTC+3
+    timestamp_ns = int(timestamp.timestamp() * 1e9)
+    data = f"test_5,host={host} {name}={value} {timestamp_ns}"
     try:
         write_api.write(bucket=bucket, org=org, record=data)
-        print(f"Data written to InfluxDB: {name}={value}")
+        print(f"Data written to InfluxDB: {name}={value} at {timestamp}")
     except Exception as e:
         print(f"Failed to write to InfluxDB, caching locally: {e}")
-        timestamp = datetime.datetime.utcnow()
         c_cache.execute("INSERT INTO data_cache (measurement, field, value, host, timestamp) VALUES (?, ?, ?, ?, ?)", ("test_5", name, value, host, timestamp))
         conn_cache.commit()
 
@@ -46,11 +47,12 @@ def resend_cached_data():
     rows = c_cache.fetchall()
     for row in rows:
         try:
-            data = f"{row[1]},host={row[4]} {row[2]}={row[3]}"
+            timestamp_ns = int(datetime.datetime.strptime(row[5], '%Y-%m-%d %H:%M:%S.%f').timestamp() * 1e9)
+            data = f"{row[1]},host={row[4]} {row[2]}={row[3]} {timestamp_ns}"
             write_api.write(bucket=bucket, org=org, record=data)
             c_cache.execute("DELETE FROM data_cache WHERE id=?", (row[0],))
             conn_cache.commit()
-            print(f"Resent cached data to InfluxDB: {row[2]}={row[3]}")
+            print(f"Resent cached data to InfluxDB: {row[2]}={row[3]} at {row[5]}")
         except Exception as e:
             print(f"Failed to resend cached data: {e}")
             break
@@ -71,10 +73,11 @@ while True:
         if last_record:
             current_amounts = last_record[:4]
             state_amounts = last_record[4:8]
+            timestamp = datetime.datetime.utcnow() + datetime.timedelta(hours=3)  # Adjusting for UTC+3
             for i, value in enumerate(current_amounts, start=1):
-                zapis(f"current_amount_{i}", value, table)
+                zapis(f"current_amount_{i}", value, table, timestamp)
             for i, value in enumerate(state_amounts, start=1):
-                zapis(f"state_amount_{i}", value, table)
+                zapis(f"state_amount_{i}", value, table, timestamp)
     resend_cached_data()
     sleep(60)  # Перевіряємо кожну хвилину
 

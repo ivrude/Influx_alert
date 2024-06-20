@@ -8,7 +8,7 @@ from influxdb_client.client.write_api import SYNCHRONOUS
 token = "Xwx1R1lV2_dcGr2AvCDHPoRvpq90n5hlCwutM2Zw3ZQXKzmURxj1q6Vs1BQx9fIiL499NRDpzyZwW0Gv8uGnBA=="
 org = "Chornobyl"
 bucket = "Graf"
-url = "http://192.168.0.59:8086"
+url = "http://192.168.0.52:8086"
 
 # Ініціалізація клієнта InfluxDB
 client = InfluxDBClient(url=url, token=token, org=org)
