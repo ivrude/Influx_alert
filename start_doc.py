@@ -50,3 +50,4 @@ except KeyboardInterrupt:
     if container is not None and container.status == 'running':
         stop_container(container)
     print("Script interrupted. Exiting...")
+
