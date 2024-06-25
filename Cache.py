@@ -32,13 +32,13 @@ def zapis(name, value, host, timestamp=None):
     if timestamp is None:
         timestamp = datetime.datetime.utcnow() + datetime.timedelta(hours=3)  # Adjusting for UTC+3
     timestamp_ns = int(timestamp.timestamp() * 1e9)
-    data = f"test_5,host={host} {name}={value} {timestamp_ns}"
+    data = f"test_6,host={host} {name}={value} {timestamp_ns}"
     try:
         write_api.write(bucket=bucket, org=org, record=data)
         print(f"Data written to InfluxDB: {name}={value} at {timestamp}")
     except Exception as e:
         print(f"Failed to write to InfluxDB, caching locally: {e}")
-        c_cache.execute("INSERT INTO data_cache (measurement, field, value, host, timestamp) VALUES (?, ?, ?, ?, ?)", ("test_5", name, value, host, timestamp))
+        c_cache.execute("INSERT INTO data_cache (measurement, field, value, host, timestamp) VALUES (?, ?, ?, ?, ?)", ("test_6", name, value, host, timestamp))
         conn_cache.commit()
 
 # Функція для повторної відправки кешованих даних
@@ -73,11 +73,14 @@ while True:
         if last_record:
             current_amounts = last_record[:4]
             state_amounts = last_record[4:8]
+            triger_state = last_record[8:12]
             timestamp = datetime.datetime.utcnow() + datetime.timedelta(hours=3)  # Adjusting for UTC+3
             for i, value in enumerate(current_amounts, start=1):
                 zapis(f"current_amount_{i}", value, table, timestamp)
             for i, value in enumerate(state_amounts, start=1):
                 zapis(f"state_amount_{i}", value, table, timestamp)
+            for i, value in enumerate(triger_state, start=1):
+                zapis(f"triger_state_{i}", value, table, timestamp)
     resend_cached_data()
     sleep(60)  # Перевіряємо кожну хвилину
 
