@@ -29,22 +29,10 @@ def index():
             last_record = get_last_record(conn, table)
             if last_record:
                 # Assuming the columns have indices for current_amounts and state_amounts
-                current_amounts = last_record[:4]
-                state_amounts = last_record[4:8]
+                triger_state = last_record[8:12]
                 for i in range(1, 5):
-                    current_amount = current_amounts[i-1]
-                    state_amount = state_amounts[i-1]
-                    if current_amount is not None and state_amount is not None:
-                        if current_amount > 2 * state_amount and current_amount < 3 * state_amount:
-                            triggers[f"trigger_{i}"] = 2
-                        elif current_amount >= 3 * state_amount:
-                            triggers[f"trigger_{i}"] = 3
-                        else:
-                            triggers[f"trigger_{i}"] = 1
-                    else:
-                        triggers[f"trigger_{i}"] = None
-            else:
-                triggers = {f"trigger_{i}": None for i in range(1, 5)}
+                    triggers[f"trigger_{i}"] = triger_state[i-1]
+                    print(triggers)
     finally:
         conn.close()  # Ensure the connection is closed after use
 

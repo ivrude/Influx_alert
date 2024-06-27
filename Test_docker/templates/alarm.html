@@ -96,10 +96,10 @@
 <body>
     <h1>Trigger States for Host3</h1>
     <div class="container">
-        <div class="square {% if triggers['trigger_1'] == 1 %}green{% elif triggers['trigger_1'] == 2 %}yellow{% elif triggers['trigger_1'] == 3 %}red{% else %}grey{% endif %}">Tg1<br>{% if triggers['trigger_1'] == 1 %}OK{% elif triggers['trigger_1'] == 2 %}Attention{% elif triggers['trigger_1'] == 3 %}Alert{% else %}No Data{% endif %}</div>
-        <div class="square {% if triggers['trigger_2'] == 1 %}green{% elif triggers['trigger_2'] == 2 %}yellow{% elif triggers['trigger_2'] == 3 %}red{% else %}grey{% endif %}">Tg2<br>{% if triggers['trigger_2'] == 1 %}OK{% elif triggers['trigger_2'] == 2 %}Attention{% elif triggers['trigger_2'] == 3 %}Alert{% else %}No Data{% endif %}</div>
-        <div class="square {% if triggers['trigger_3'] == 1 %}green{% elif triggers['trigger_3'] == 2 %}yellow{% elif triggers['trigger_3'] == 3 %}red{% else %}grey{% endif %}">Tg3<br>{% if triggers['trigger_3'] == 1 %}OK{% elif triggers['trigger_3'] == 2 %}Attention{% elif triggers['trigger_3'] == 3 %}Alert{% else %}No Data{% endif %}</div>
-        <div class="square {% if triggers['trigger_4'] == 1 %}green{% elif triggers['trigger_4'] == 2 %}yellow{% elif triggers['trigger_4'] == 3 %}red{% else %}grey{% endif %}">Tg4<br>{% if triggers['trigger_4'] == 1 %}OK{% elif triggers['trigger_4'] == 2 %}Attention{% elif triggers['trigger_4'] == 3 %}Alert{% else %}No Data{% endif %}</div>
+        <div class="square {% if triggers['trigger_1'] == 0 %}green{% elif triggers['trigger_1'] == 1 %}yellow{% elif triggers['trigger_1'] == 2 %}red{% else %}grey{% endif %}">Tg1<br>{% if triggers['trigger_1'] == 0 %}OK{% elif triggers['trigger_1'] == 1 %}Увага{% elif triggers['trigger_1'] == 2 %}Небезпека{% else %}No Data{% endif %}</div>
+        <div class="square {% if triggers['trigger_2'] == 0 %}green{% elif triggers['trigger_2'] == 1 %}yellow{% elif triggers['trigger_2'] == 2 %}red{% else %}grey{% endif %}">Tg2<br>{% if triggers['trigger_2'] == 0 %}OK{% elif triggers['trigger_2'] == 1 %}Увага{% elif triggers['trigger_2'] == 2 %}Небезпека{% else %}No Data{% endif %}</div>
+        <div class="square {% if triggers['trigger_3'] == 0 %}green{% elif triggers['trigger_3'] == 1 %}yellow{% elif triggers['trigger_3'] == 2 %}red{% else %}grey{% endif %}">Tg3<br>{% if triggers['trigger_3'] == 0 %}OK{% elif triggers['trigger_3'] == 1 %}Увага{% elif triggers['trigger_3'] == 2 %}Небезпека{% else %}No Data{% endif %}</div>
+        <div class="square {% if triggers['trigger_4'] == 0 %}green{% elif triggers['trigger_4'] == 1 %}yellow{% elif triggers['trigger_4'] == 2 %}red{% else %}grey{% endif %}">Tg4<br>{% if triggers['trigger_4'] == 0 %}OK{% elif triggers['trigger_4'] == 1 %}Увага{% elif triggers['trigger_4'] == 2 %}Небезпека{% else %}No Data{% endif %}</div>
     </div>
     <div class="button-container">
         <div class="striped-square">
