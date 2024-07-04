@@ -68,28 +68,32 @@ tables = ['host1', 'host2', 'host3', 'host4']
 
 # Періодична перевірка та повторна відправка кешованих даних
 while True:
-
     for table in tables:
         last_record = get_last_record(cursor, table)
-        if last_record:
-            current_amounts = last_record[:4]
-            state_amounts = last_record[4:8]
-            triger_state = last_record[8:12]
-            sumar = last_record[8] + last_record[9] + last_record[10] + last_record[11]
-            timestamp = datetime.datetime.utcnow() + datetime.timedelta(hours=3)  # Adjusting for UTC+3
-            for i, value in enumerate(current_amounts, start=1):
-                zapis(f"current_amount_{i}", value, table, timestamp)
-            for i, value in enumerate(state_amounts, start=1):
-                zapis(f"state_amount_{i}", value, table, timestamp)
-            if sumar > 1:
-                for i, value in enumerate(triger_state, start=1):
-                    if triger_state[i-1] == 0:
+        radio_state = last_record[12]
+        if radio_state == 0:
+            if last_record:
+                current_amounts = last_record[:4]
+                state_amounts = last_record[4:8]
+                triger_state = last_record[8:12]
+                sumar = last_record[8] + last_record[9] + last_record[10] + last_record[11]
+                timestamp = datetime.datetime.utcnow() + datetime.timedelta(hours=3)  # Adjusting for UTC+3
+                zapis("radio_state", radio_state, table, timestamp)
+                for i, value in enumerate(current_amounts, start=1):
+                    zapis(f"current_amount_{i}", value, table, timestamp)
+                for i, value in enumerate(state_amounts, start=1):
+                    zapis(f"state_amount_{i}", value, table, timestamp)
+                if sumar > 1:
+                    for i, value in enumerate(triger_state, start=1):
+                        if triger_state[i-1] == 0:
+                            zapis(f"triger_state_{i}", value, table, timestamp)
+                        else:
+                            zapis(f"triger_state_{i}", 2, table, timestamp)
+                else:
+                    for i, value in enumerate(triger_state, start=1):
                         zapis(f"triger_state_{i}", value, table, timestamp)
-                    else:
-                        zapis(f"triger_state_{i}", 2, table, timestamp)
-            else:
-                for i, value in enumerate(triger_state, start=1):
-                    zapis(f"triger_state_{i}", value, table, timestamp)
+        else:
+            zapis("radio_state", radio_state, table, timestamp)
     resend_cached_data()
     sleep(60)  # Перевіряємо кожну хвилину
 
