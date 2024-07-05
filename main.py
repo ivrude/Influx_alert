@@ -13,11 +13,17 @@ def play_music(file_path):
 def stop_music():
     pygame.mixer.music.stop()
 
-@app.route('/webhook', methods=['POST','GET'])
+@app.route('/webhook1', methods=['POST','GET'])
 def webhook():
-    file_path = "Try.mp3"
+    file_path = "sound/Try.mp3"
     play_music(file_path)
     return 'Music started!'
+
+@app.route('/webhook2', methods=['POST','GET'])
+def webhook22():
+    file_path = "sound/fallout_4_01 Fallout 4 Main Theme.mp3"
+    play_music(file_path)
+    return 'Music started_22!'
 
 @app.route('/stop', methods=['POST','GET','OPTIONS'])
 def stop():
@@ -29,4 +35,4 @@ def stop():
         '''
 
 if __name__ == '__main__':
-    app.run(host='192.168.0.38', port=5002, debug=True)
+    app.run(host='0.0.0.0', port=5001, debug=True)
