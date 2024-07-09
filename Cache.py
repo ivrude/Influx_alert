@@ -36,7 +36,7 @@ def zapis(name, value, host, timestamp=None):
     data = f"test_6,host={host} {name}={value} {timestamp_ns}"
     try:
         write_api.write(bucket=bucket, org=org, record=data)
-        print(f"Data written to InfluxDB: {name}={value} at {timestamp}")
+        print(f"Datas written to InfluxDB: {name}={value} at {timestamp}")
     except Exception as e:
         print(f"Failed to write to InfluxDB, caching locally: {e}")
         c_cache.execute("INSERT INTO data_cache (measurement, field, value, host, timestamp) VALUES (?, ?, ?, ?, ?)", ("test_6", name, value, host, timestamp))
