@@ -13,7 +13,7 @@ url_influx = "influx ip:port"
 rtsp_camrera = 'rtsp://user:password@ip:port'
 
 
-To start full project (grafana+influx) together, go to '''https://github.com/ivrude/docker'''
+To start full project (grafana+influx) together, go to https://github.com/ivrude/docker
 
 to start grafana:
 
