@@ -1,3 +1,4 @@
+import sqlite3
 from time import sleep
 
 from influxdb_client import InfluxDBClient
@@ -14,6 +15,13 @@ url = "http://192.168.0.52:8086"
 client = InfluxDBClient(url=url, token=token, org=org)
 query_api = client.query_api()
 write_api = client.write_api(write_options=SYNCHRONOUS)
+
+
+conn = sqlite3.connect('Test_docker/Test.db')
+cursor = conn.cursor()
+# Список таблиць для обробки
+tables = ['host1', 'host2', 'host3', 'host4']
+
 
 # Функція для отримання останнього значення для вказаного поля
 def fetch_last_value(field_name, host):

@@ -3,12 +3,13 @@ from time import sleep
 from influxdb_client import InfluxDBClient, Point, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS
 import datetime
+from config import token_influx, url_influx
 
 # Параметри підключення до InfluxDB
-token = "Xwx1R1lV2_dcGr2AvCDHPoRvpq90n5hlCwutM2Zw3ZQXKzmURxj1q6Vs1BQx9fIiL499NRDpzyZwW0Gv8uGnBA=="
+token = token_influx
 org = "Chornobyl"
 bucket = "Graf"
-url = "http://192.168.0.52:8086"
+url = url_influx
 
 # Ініціалізація клієнта InfluxDB
 client = InfluxDBClient(url=url, token=token, org=org)

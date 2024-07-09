@@ -1,0 +1,12 @@
+venv/
+.VENV/
+ENV/
+.env/
+.venv/
+ENV/
+env/
+vidostream_v2.py
+local_cache.db
+influx.py
+get_data.py
+config.py

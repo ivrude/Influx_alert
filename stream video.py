@@ -1,18 +1,18 @@
 from flask import Flask, Response
 import cv2
 import time
-
+from config import rtsp_camrera
 app = Flask(__name__)
 
 def generate_frames():
-    camera = cv2.VideoCapture('rtsp://admin:s0321bzd@77.47.130.226:554')
+    camera = cv2.VideoCapture(rtsp_camrera)
     while True:
 
         success, frame = camera.read()
         if not success:
             print("Failed to grab frame, retrying...")
             camera.release()
-            camera = cv2.VideoCapture('rtsp://admin:s0321bzd@77.47.130.226:554')
+            camera = cv2.VideoCapture(rtsp_camrera)
             time.sleep(1)
             continue
 
