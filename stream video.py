@@ -5,7 +5,7 @@ import time
 app = Flask(__name__)
 
 def generate_frames():
-    camera = cv2.VideoCapture('rtsp://admin:s0321bzd@77.47.130.226:554')
+    camera = cv2.VideoCapture('')
     while True:
 
         success, frame = camera.read()
