@@ -12,7 +12,7 @@ def generate_frames():
         if not success:
             print("Failed to grab frame, retrying...")
             camera.release()
-            camera = cv2.VideoCapture('rtsp://admin:s0321bzd@77.47.130.226:554')
+            camera = cv2.VideoCapture('')
             time.sleep(1)
             continue
 
