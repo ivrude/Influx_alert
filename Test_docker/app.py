@@ -17,53 +17,31 @@ def get_last_record(conn, table_name):
     record = cursor.fetchone()
     return record
 
-# List of tables to process
-tables = ['host3']
-tables_e = ['host3_e']
+# Process a table and update triggers dictionary
+def process_table(triggers, conn, table_name, prefix):
+    last_record = get_last_record(conn, table_name)
+    if last_record:
+        # Assuming the columns have indices for current_amounts and state_amounts
+        triger_state = last_record[8:12]
+        sumar = sum(triger_state)
+        for i in range(1, 5):
+            if sumar > 1:
+                if triger_state[i-1] == 0:
+                    triggers[f"{prefix}{i}"] = triger_state[i-1]
+                else:
+                    triggers[f"{prefix}{i}"] = 2
+            else:
+                triggers[f"{prefix}{i}"] = triger_state[i-1]
 
 @app.route('/')
 def index():
     triggers = {}
     conn = get_db_connection()
     try:
-        for table in tables:
-            last_record = get_last_record(conn, table)
-            if last_record:
-                # Assuming the columns have indices for current_amounts and state_amounts
-                triger_state = last_record[8:12]
-                sumar = last_record[8]+last_record[9]+last_record[10]+last_record[11]
-                print(sumar)
-                for i in range(1, 5):
-                    if sumar > 1:
-                        if triger_state[i-1] == 0:
-                            triggers[f"trigger_{i}"] = triger_state[i-1]
-                            print(triggers)
-                            print("aaab")
-                        else:
-                            triggers[f"trigger_{i}"] = 2
-                            print(triggers)
-                    else:
-                        triggers[f"trigger_{i}"] = triger_state[i - 1]
-                        print(triggers)
-        for table in tables_e:
-            last_record = get_last_record(conn, table)
-            if last_record:
-                # Assuming the columns have indices for current_amounts and state_amounts
-                triger_state = last_record[8:12]
-                sumar = last_record[8]+last_record[9]+last_record[10]+last_record[11]
-                print(sumar)
-                for i in range(1, 5):
-                    if sumar > 1:
-                        if triger_state[i-1] == 0:
-                            triggers[f"trigger_e{i}"] = triger_state[i-1]
-                            print(triggers)
-                            print("aaab")
-                        else:
-                            triggers[f"trigger_e{i}"] = 2
-                            print(triggers)
-                    else:
-                        triggers[f"trigger_e{i}"] = triger_state[i - 1]
-                        print(triggers)
+        for table in ['host3']:
+            process_table(triggers, conn, table, "trigger_")
+        for table in ['host3_e']:
+            process_table(triggers, conn, table, "trigger_e")
     finally:
         conn.close()  # Ensure the connection is closed after use
 
