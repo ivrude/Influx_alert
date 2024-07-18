@@ -19,6 +19,7 @@ def get_last_record(conn, table_name):
 
 # List of tables to process
 tables = ['host3']
+tables_e = ['host3_e']
 
 @app.route('/')
 def index():
@@ -43,6 +44,25 @@ def index():
                             print(triggers)
                     else:
                         triggers[f"trigger_{i}"] = triger_state[i - 1]
+                        print(triggers)
+        for table in tables_e:
+            last_record = get_last_record(conn, table)
+            if last_record:
+                # Assuming the columns have indices for current_amounts and state_amounts
+                triger_state = last_record[8:12]
+                sumar = last_record[8]+last_record[9]+last_record[10]+last_record[11]
+                print(sumar)
+                for i in range(1, 5):
+                    if sumar > 1:
+                        if triger_state[i-1] == 0:
+                            triggers[f"trigger_e{i}"] = triger_state[i-1]
+                            print(triggers)
+                            print("aaab")
+                        else:
+                            triggers[f"trigger_e{i}"] = 2
+                            print(triggers)
+                    else:
+                        triggers[f"trigger_e{i}"] = triger_state[i - 1]
                         print(triggers)
     finally:
         conn.close()  # Ensure the connection is closed after use
