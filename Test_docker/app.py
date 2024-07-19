@@ -1,4 +1,6 @@
 import sqlite3
+
+import requests
 from flask import Flask, render_template
 
 app = Flask(__name__)
@@ -32,6 +34,10 @@ def process_table(triggers, conn, table_name, prefix):
                     triggers[f"{prefix}{i}"] = 2
             else:
                 triggers[f"{prefix}{i}"] = triger_state[i-1]
+        for i in range (1, 5):
+            if triger_state[i-1] == 1:
+
+                responce = requests.post("http://192.168.0.31:5001/webhook2")
 
 @app.route('/')
 def index():

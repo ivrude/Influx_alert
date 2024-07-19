@@ -2,13 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trigger States</title>
     <style>
         body {
-            background-color: #002366;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #e0f7fa, #80deea, #b2ebf2);
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        }
+         header {
+            background-color: #00796b; /* темно-зелений */
             color: white;
-            font-family: Arial, sans-serif;
             text-align: center;
+            padding: 20px;
+            font-size: 24px;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #004d40; /* дуже темний зелений */
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            background-color: #004d40; /* дуже темний зелений */
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
         }
         h1 {
             margin: 20px;
@@ -17,7 +52,7 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 20px;
+            gap: 10px;
         }
         .square {
             width: 100px;
@@ -31,10 +66,21 @@
             color: white;
             text-align: center;
         }
-        .green { background-color: green; }
-        .yellow { background-color: yellow; color: black; }
-        .red { background-color: red; }
-        .grey { background-color: grey; }
+        .square.green {
+    background: linear-gradient(45deg, #4caf50 0%, #388e3c 100%);
+}
+
+.square.yellow {
+    background: linear-gradient(45deg, #ffeb3b 0%, #fbc02d 100%);
+}
+
+.square.red {
+    background: linear-gradient(45deg, #f44336 0%, #c62828 100%);
+}
+
+.square.grey {
+    background: linear-gradient(45deg, #9e9e9e 0%, #616161 100%);
+}
 
         .button-container {
             display: flex;
@@ -69,7 +115,7 @@
     <script>
         function stopMusic() {
             const urls = [
-                'http://192.168.0.47:5001/stop',
+                'http://192.168.0.31:5001/stop',
             ];
             urls.forEach(url => {
                 fetch(url, {
@@ -93,14 +139,18 @@
     </script>
 </head>
 <body>
-    <h1>Trigger States for Host3</h1>
+        <header>
+        Датчики КДП "Дитятки"
+        </header>
+    <nav>
+        <a href="http://localhost:3000/">Grafana</a>
+    </nav>
     <div class="container">
         <div class="square {% if triggers['trigger_1'] == 0 %}green{% elif triggers['trigger_1'] == 1 %}yellow{% elif triggers['trigger_1'] == 2 %}red{% else %}grey{% endif %}">Tg1<br>{% if triggers['trigger_1'] == 0 %}OK{% elif triggers['trigger_1'] == 1 %}Увага{% elif triggers['trigger_1'] == 2 %}Небезпека{% else %}No Data{% endif %}</div>
         <div class="square {% if triggers['trigger_2'] == 0 %}green{% elif triggers['trigger_2'] == 1 %}yellow{% elif triggers['trigger_2'] == 2 %}red{% else %}grey{% endif %}">Tg2<br>{% if triggers['trigger_2'] == 0 %}OK{% elif triggers['trigger_2'] == 1 %}Увага{% elif triggers['trigger_2'] == 2 %}Небезпека{% else %}No Data{% endif %}</div>
         <div class="square {% if triggers['trigger_3'] == 0 %}green{% elif triggers['trigger_3'] == 1 %}yellow{% elif triggers['trigger_3'] == 2 %}red{% else %}grey{% endif %}">Tg3<br>{% if triggers['trigger_3'] == 0 %}OK{% elif triggers['trigger_3'] == 1 %}Увага{% elif triggers['trigger_3'] == 2 %}Небезпека{% else %}No Data{% endif %}</div>
         <div class="square {% if triggers['trigger_4'] == 0 %}green{% elif triggers['trigger_4'] == 1 %}yellow{% elif triggers['trigger_4'] == 2 %}red{% else %}grey{% endif %}">Tg4<br>{% if triggers['trigger_4'] == 0 %}OK{% elif triggers['trigger_4'] == 1 %}Увага{% elif triggers['trigger_4'] == 2 %}Небезпека{% else %}No Data{% endif %}</div>
     </div>
-    <h1>Trigger States for Host3_E</h1>
     <div class="container">
         <div class="square {% if triggers['trigger_e1'] == 0 %}green{% elif triggers['trigger_e1'] == 1 %}yellow{% elif triggers['trigger_e1'] == 2 %}red{% else %}grey{% endif %}">Tg1<br>{% if triggers['trigger_e1'] == 0 %}OK{% elif triggers['trigger_e1'] == 1 %}Увага{% elif triggers['trigger_e1'] == 2 %}Небезпека{% else %}No Data{% endif %}</div>
         <div class="square {% if triggers['trigger_e2'] == 0 %}green{% elif triggers['trigger_e2'] == 1 %}yellow{% elif triggers['trigger_e2'] == 2 %}red{% else %}grey{% endif %}">Tg2<br>{% if triggers['trigger_e2'] == 0 %}OK{% elif triggers['trigger_e2'] == 1 %}Увага{% elif triggers['trigger_e2'] == 2 %}Небезпека{% else %}No Data{% endif %}</div>
@@ -112,5 +162,8 @@
             <button class="stop-button" onclick="stopMusic()">Stop</button>
         </div>
     </div>
+    <footer>
+        Приклад футера
+    </footer>
 </body>
 </html>
