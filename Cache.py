@@ -63,7 +63,7 @@ conn = sqlite3.connect('Test_docker/Test.db')
 cursor = conn.cursor()
 
 # Список таблиць для обробки
-tables = ['host1', 'host2', 'host3', 'host4']
+tables = ['host3_e','host3']
 
 # Запис останніх даних з кожної таблиці в InfluxDB
 
