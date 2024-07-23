@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        function sendPrintRequest() {
+            const dashboardUrl = encodeURIComponent('http://192.168.0.66:3000/public-dashboards/fc65fa54f4cc4aa1bfabd35cdbe50cf1');
+            const outputFile = encodeURIComponent('dashboard.pdf');
+
+            const requestUrl = `http://192.168.0.66:3003/print-dashboard?url=${dashboardUrl}&output=${outputFile}`;
+
+            // Використання fetch для безпосереднього запиту
+            fetch(requestUrl)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('PDF створено успішно:', data);
+                    // Додати затримку перед закриттям вікна
+                    setTimeout(function() {
+                        window.close();
+                    }, 3000); // Затримка 3 секунди
+                })
+                .catch(error => {
+                    console.error('Помилка при створенні PDF:', error);
+                    // Закрити вікно в разі помилки
+                    window.close();
+                });
+        }
+
+        // Виклик функції автоматично при завантаженні сторінки
+        window.onload = sendPrintRequest;
+    </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 import pygame
 
 app = Flask(__name__)
@@ -24,6 +24,11 @@ def webhook22():
     file_path = "sound/fallout_4_01 Fallout 4 Main Theme.mp3"
     play_music(file_path)
     return 'Music started_22!'
+
+@app.route('/print', methods=['POST','GET'])
+def make_pdf():
+    return render_template('make_pdf.html')
+
 
 @app.route('/stop', methods=['POST','GET','OPTIONS'])
 def stop():
