@@ -22,7 +22,7 @@ def capture_frames():
             continue
 
         if frame_queue.full():
-            for i in range(6):
+            for i in range(5):
                 frame_queue.get()
                 i=i+1
 
