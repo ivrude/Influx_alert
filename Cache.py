@@ -31,7 +31,7 @@ def get_last_record(cursor, table_name):
 # Функція для запису даних в InfluxDB або кешування в разі невдачі
 def zapis(name, value, host, timestamp=None):
     if timestamp is None:
-        timestamp = datetime.datetime.utcnow() + datetime.timedelta(hours=3)  # Adjusting for UTC+3
+        timestamp = datetime.datetime.utcnow() + datetime.timedelta(hours=2)  # Adjusting for UTC+3
     timestamp_ns = int(timestamp.timestamp() * 1e9)
     data = f"test_6,host={host} {name}={value} {timestamp_ns}"
     try:
@@ -78,7 +78,7 @@ while True:
                 state_amounts = last_record[4:8]
                 triger_state = last_record[8:12]
                 sumar = last_record[8] + last_record[9] + last_record[10] + last_record[11]
-                timestamp = datetime.datetime.utcnow() + datetime.timedelta(hours=3)  # Adjusting for UTC+3
+                timestamp = datetime.datetime.utcnow() + datetime.timedelta(hours=2)  # Adjusting for UTC+3
                 zapis("radio_state", radio_state, table, timestamp)
                 for i, value in enumerate(current_amounts, start=1):
                     zapis(f"current_amount_{i}", value, table, timestamp)
