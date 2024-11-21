@@ -1,18 +1,19 @@
+#app to send info to influx from local db
 import sqlite3
 from time import sleep
-from influxdb_client import InfluxDBClient, Point, WritePrecision
+from influxdb_client import InfluxDBClient
 from influxdb_client.client.write_api import SYNCHRONOUS
 import datetime
 from config import token_influx, url_influx
 
 # Параметри підключення до InfluxDB
-token = token_influx
-org = "Chornobyl"
-bucket = "Graf"
-url = url_influx
+TOKEN = token_influx
+ORG = "Chornobyl"
+BUCKET = "Graf"
+URL = url_influx
 
 # Ініціалізація клієнта InfluxDB
-client = InfluxDBClient(url=url, token=token, org=org)
+client = InfluxDBClient(url=URL, token=TOKEN, org=ORG)
 write_api = client.write_api(write_options=SYNCHRONOUS)
 
 # Створення локальної бази даних SQLite для кешування
@@ -20,19 +21,24 @@ conn_cache = sqlite3.connect("local_cache.db")
 c_cache = conn_cache.cursor()
 c_cache.execute(
     """CREATE TABLE IF NOT EXISTS data_cache
-                   (id INTEGER PRIMARY KEY, measurement TEXT, field TEXT, value REAL, host TEXT, timestamp DATETIME)"""
+                   (id INTEGER PRIMARY KEY, 
+                   measurement TEXT, 
+                   field TEXT, 
+                   value REAL, 
+                   host TEXT, 
+                   timestamp DATETIME)"""
 )
 conn_cache.commit()
 
 
-# Функція для отримання останнього запису з таблиці
+# Get last record from db
 def get_last_record(cursor, table_name):
     query = f"SELECT * FROM {table_name} ORDER BY rowid DESC LIMIT 1"
     cursor.execute(query)
     return cursor.fetchone()
 
 
-# Функція для запису даних в InfluxDB або кешування в разі невдачі
+# send data to influx or cache
 def zapis(name, value, host, timestamp=None):
     if timestamp is None:
         timestamp = datetime.datetime.utcnow() + datetime.timedelta(
@@ -41,7 +47,7 @@ def zapis(name, value, host, timestamp=None):
     timestamp_ns = int(timestamp.timestamp() * 1e9)
     data = f"test_6,host={host} {name}={value} {timestamp_ns}"
     try:
-        write_api.write(bucket=bucket, org=org, record=data)
+        write_api.write(bucket=BUCKET, org=ORG, record=data)
         print(f"Datas written to InfluxDB: {name}={value} at {timestamp}")
     except Exception as e:
         print(f"Failed to write to InfluxDB, caching locally: {e}")
@@ -52,7 +58,7 @@ def zapis(name, value, host, timestamp=None):
         conn_cache.commit()
 
 
-# Функція для повторної відправки кешованих даних
+# resend data fron cache
 def resend_cached_data():
     c_cache.execute("SELECT * FROM data_cache")
     rows = c_cache.fetchall()
@@ -63,7 +69,7 @@ def resend_cached_data():
                 * 1e9
             )
             data = f"{row[1]},host={row[4]} {row[2]}={row[3]} {timestamp_ns}"
-            write_api.write(bucket=bucket, org=org, record=data)
+            write_api.write(bucket=BUCKET, org=ORG, record=data)
             c_cache.execute("DELETE FROM data_cache WHERE id=?", (row[0],))
             conn_cache.commit()
             print(f"Resent cached data to InfluxDB: {row[2]}={row[3]} at {row[5]}")
@@ -72,7 +78,7 @@ def resend_cached_data():
             break
 
 
-# Підключення до основної бази даних SQLite
+# connect to local db
 conn = sqlite3.connect("Test_docker/Test.db")
 cursor = conn.cursor()
 
@@ -81,7 +87,7 @@ tables = ["host3_e", "host3"]
 
 # Запис останніх даних з кожної таблиці в InfluxDB
 
-# Періодична перевірка та повторна відправка кешованих даних
+# Cycle loking into local db and sending data
 while True:
     for table in tables:
         last_record = get_last_record(cursor, table)

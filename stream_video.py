@@ -1,7 +1,8 @@
-from flask import Flask, Response
+#app to refactor rtsp to http
 import cv2
 import threading
 import queue
+from flask import Flask, Response
 from config import rtsp_camrera
 
 app = Flask(__name__)
@@ -9,7 +10,7 @@ app = Flask(__name__)
 
 frame_queue = queue.Queue(maxsize=10)
 
-
+# capture video frames
 def capture_frames():
     cap = cv2.VideoCapture(rtsp_camrera)
     if not cap.isOpened():
@@ -29,7 +30,7 @@ def capture_frames():
 
         frame_queue.put(frame)
 
-
+# generate jpg photos
 def generate():
     while True:
         if not frame_queue.empty():
@@ -42,7 +43,7 @@ def generate():
             frame = buffer.tobytes()
             yield (b"--frame\r\n" b"Content-Type: image/jpeg\r\n\r\n" + frame + b"\r\n")
 
-
+# generate http video from photos
 @app.route("/video_feed")
 def video_feed():
     return Response(generate(), mimetype="multipart/x-mixed-replace; boundary=frame")
@@ -51,4 +52,4 @@ def video_feed():
 if __name__ == "__main__":
     capture_thread = threading.Thread(target=capture_frames)
     capture_thread.start()
-    app.run(host="0.0.0.0", port=8080)
+    app.run(host="0.0.0.0", port=8888)
