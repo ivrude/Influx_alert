@@ -52,7 +52,8 @@ def zapis(name, value, host, timestamp=None):
     except Exception as e:
         print(f"Failed to write to InfluxDB, caching locally: {e}")
         c_cache.execute(
-            "INSERT INTO data_cache (measurement, field, value, host, timestamp) VALUES (?, ?, ?, ?, ?)",
+            "INSERT INTO data_cache (measurement, field, value,"
+            " host, timestamp) VALUES (?, ?, ?, ?, ?)",
             ("test_6", name, value, host, timestamp),
         )
         conn_cache.commit()
