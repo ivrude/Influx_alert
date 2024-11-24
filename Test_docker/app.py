@@ -40,9 +40,9 @@ def process_table(triggers, conn, table_name, prefix):
                 triggers[f"{prefix}{i}"] = triger_state[i - 1]
         for i in range(1, 5):
             if triger_state[i - 1] == 2:
-                responce = requests.post("http://192.168.0.151:8000/webhook2")
+                responce = requests.post("http://192.168.0.36:8000/webhook2")
             if triger_state[i - 1] == 1:
-                responce = requests.post("http://192.168.0.151:8000/webhook1")
+                responce = requests.post("http://192.168.0.36:8000/webhook1")
 
 
 @app.route("/")

@@ -1,4 +1,4 @@
-#app to send info to influx from local db
+# app to send info to influx from local db
 import sqlite3
 from time import sleep
 from influxdb_client import InfluxDBClient
@@ -66,14 +66,20 @@ def resend_cached_data():
     for row in rows:
         try:
             timestamp_ns = int(
-                datetime.datetime.strptime(row[5], "%Y-%m-%d %H:%M:%S.%f").timestamp()
+                datetime.datetime.strptime(
+                    row[5], "%Y-%m-%d %H:%M:%S.%f"
+                ).timestamp()
                 * 1e9
             )
             data = f"{row[1]},host={row[4]} {row[2]}={row[3]} {timestamp_ns}"
             write_api.write(bucket=BUCKET, org=ORG, record=data)
-            c_cache.execute("DELETE FROM data_cache WHERE id=?", (row[0],))
+            c_cache.execute("DELETE FROM data_cache WHERE id=?", (
+                row[0],
+            ))
             conn_cache.commit()
-            print(f"Resent cached data to InfluxDB: {row[2]}={row[3]} at {row[5]}")
+            print(
+                f"Resent cached data to Influx: {row[2]}={row[3]} at {row[5]}"
+            )
         except Exception as e:
             print(f"Failed to resend cached data: {e}")
             break
@@ -99,7 +105,10 @@ while True:
                 state_amounts = last_record[4:8]
                 triger_state = last_record[8:12]
                 sumar = (
-                    last_record[8] + last_record[9] + last_record[10] + last_record[11]
+                    last_record[8] +
+                    last_record[9] +
+                    last_record[10] +
+                    last_record[11]
                 )
                 timestamp = datetime.datetime.utcnow() + datetime.timedelta(
                     hours=2
