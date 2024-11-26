@@ -1,9 +1,9 @@
 # app to send info to influx from local db
+import datetime
 import sqlite3
 from time import sleep
 from influxdb_client import InfluxDBClient
 from influxdb_client.client.write_api import SYNCHRONOUS
-import datetime
 from config import token_influx, url_influx
 
 # Параметри підключення до InfluxDB

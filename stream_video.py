@@ -1,7 +1,7 @@
 #app to refactor rtsp to http
-import cv2
 import threading
 import queue
+import cv2
 from flask import Flask, Response
 from config import rtsp_camrera
 
@@ -41,7 +41,8 @@ def generate():
                 continue
 
             frame = buffer.tobytes()
-            yield (b"--frame\r\n" b"Content-Type: image/jpeg\r\n\r\n" + frame + b"\r\n")
+            yield (b"--frame\r\n" b"Content-Type: image/jpeg\r\n\r\n" +
+                   frame + b"\r\n")
 
 # generate http video from photos
 @app.route("/video_feed")
