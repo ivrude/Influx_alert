@@ -49,11 +49,11 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 4,
+        "w": 2,
         "x": 0,
         "y": 0
       },
-      "id": 12,
+      "id": 15,
       "options": {
         "colorMode": "background",
         "graphMode": "none",
@@ -67,7 +67,7 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "auto",
+        "textMode": "value",
         "wideLayout": true
       },
       "pluginVersion": "10.4.2",
@@ -77,11 +77,11 @@
             "type": "influxdb",
             "uid": "adlnsfzvw0a9sa"
           },
-          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_5\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"current_amount_1\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_6\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"current_amount_3\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
           "refId": "A"
         }
       ],
-      "title": "Поточне значення №1",
+      "title": "Вимір.",
       "type": "stat"
     },
     {
@@ -94,19 +94,14 @@
           "mappings": [
             {
               "options": {
-                "1": {
+                "0": {
                   "color": "dark-green",
                   "index": 0,
                   "text": "OK"
                 },
-                "2": {
-                  "color": "yellow",
-                  "index": 1,
-                  "text": "Увага"
-                },
-                "3": {
+                "1": {
                   "color": "dark-red",
-                  "index": 2,
+                  "index": 1,
                   "text": "Тривога"
                 }
               },
@@ -132,11 +127,11 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 3,
-        "x": 4,
+        "w": 2,
+        "x": 2,
         "y": 0
       },
-      "id": 11,
+      "id": 20,
       "options": {
         "colorMode": "background",
         "graphMode": "none",
@@ -150,7 +145,7 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "auto",
+        "textMode": "value",
         "wideLayout": true
       },
       "pluginVersion": "10.4.2",
@@ -160,18 +155,18 @@
             "type": "influxdb",
             "uid": "adlnsfzvw0a9sa"
           },
-          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_5\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"triger_1\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_6\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"triger_state_3\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
           "refId": "A"
         }
       ],
-      "title": "Стан Датчика №1",
+      "title": "БД3",
       "type": "stat"
     },
     {
       "gridPos": {
-        "h": 6,
-        "w": 10,
-        "x": 7,
+        "h": 16,
+        "w": 16,
+        "x": 4,
         "y": 0
       },
       "id": 7,
@@ -191,19 +186,14 @@
           "mappings": [
             {
               "options": {
-                "1": {
+                "0": {
                   "color": "dark-green",
                   "index": 0,
                   "text": "OK"
                 },
-                "2": {
-                  "color": "yellow",
-                  "index": 1,
-                  "text": "Увага"
-                },
-                "3": {
+                "1": {
                   "color": "dark-red",
-                  "index": 2,
+                  "index": 1,
                   "text": "Тривога"
                 }
               },
@@ -229,11 +219,11 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 3,
-        "x": 17,
+        "w": 2,
+        "x": 20,
         "y": 0
       },
-      "id": 20,
+      "id": 21,
       "options": {
         "colorMode": "background",
         "graphMode": "none",
@@ -247,7 +237,7 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "auto",
+        "textMode": "value",
         "wideLayout": true
       },
       "pluginVersion": "10.4.2",
@@ -257,11 +247,11 @@
             "type": "influxdb",
             "uid": "adlnsfzvw0a9sa"
           },
-          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_5\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"triger_3\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_6\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"triger_state_4\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
           "refId": "A"
         }
       ],
-      "title": "Стан Датчика №3",
+      "title": "БД4",
       "type": "stat"
     },
     {
@@ -292,11 +282,11 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 20,
+        "w": 2,
+        "x": 22,
         "y": 0
       },
-      "id": 15,
+      "id": 17,
       "options": {
         "colorMode": "background",
         "graphMode": "none",
@@ -310,7 +300,7 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "auto",
+        "textMode": "value",
         "wideLayout": true
       },
       "pluginVersion": "10.4.2",
@@ -320,11 +310,11 @@
             "type": "influxdb",
             "uid": "adlnsfzvw0a9sa"
           },
-          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_5\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"current_amount_3\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_6\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"current_amount_4\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
           "refId": "A"
         }
       ],
-      "title": "Поточне значення №3",
+      "title": "Вимір.",
       "type": "stat"
     },
     {
@@ -355,71 +345,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 4,
+        "w": 2,
         "x": 0,
-        "y": 4
-      },
-      "id": 13,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.4.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "adlnsfzvw0a9sa"
-          },
-          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_5\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"state_amount_1\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "A"
-        }
-      ],
-      "title": "Стале значення фону №1",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "adlnsfzvw0a9sa"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "fixed"
-          },
-          "fieldMinMax": false,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 20,
         "y": 4
       },
       "id": 16,
@@ -436,7 +363,7 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "auto",
+        "textMode": "value",
         "wideLayout": true
       },
       "pluginVersion": "10.4.2",
@@ -446,12 +373,508 @@
             "type": "influxdb",
             "uid": "adlnsfzvw0a9sa"
           },
-          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_5\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"state_amount_3\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_6\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"state_amount_3\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
           "refId": "A"
         }
       ],
-      "title": "Стале значення фону №3",
+      "title": "Фон",
       "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "adlnsfzvw0a9sa"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 22,
+        "y": 4
+      },
+      "id": 18,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "adlnsfzvw0a9sa"
+          },
+          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_6\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"state_amount_4\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Фон",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "adlnsfzvw0a9sa"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 0,
+        "y": 8
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "adlnsfzvw0a9sa"
+          },
+          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_6\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"current_amount_1\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Вимір.",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "adlnsfzvw0a9sa"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "dark-green",
+                  "index": 0,
+                  "text": "OK"
+                },
+                "1": {
+                  "color": "dark-red",
+                  "index": 1,
+                  "text": "Тривога"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 2,
+        "x": 2,
+        "y": 8
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "adlnsfzvw0a9sa"
+          },
+          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_6\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"triger_state_1\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "БД1",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "adlnsfzvw0a9sa"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "dark-green",
+                  "index": 0,
+                  "text": "OK"
+                },
+                "1": {
+                  "color": "dark-red",
+                  "index": 1,
+                  "text": "Тривога"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 2,
+        "x": 20,
+        "y": 8
+      },
+      "id": 19,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "adlnsfzvw0a9sa"
+          },
+          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_6\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"triger_state_2\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "БД2",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "adlnsfzvw0a9sa"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 22,
+        "y": 8
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "adlnsfzvw0a9sa"
+          },
+          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_6\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"current_amount_2\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Вимір.",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "adlnsfzvw0a9sa"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 0,
+        "y": 12
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "adlnsfzvw0a9sa"
+          },
+          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_6\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"state_amount_1\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Фон",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "adlnsfzvw0a9sa"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 22,
+        "y": 12
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "adlnsfzvw0a9sa"
+          },
+          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_6\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"state_amount_2\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Фон",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "adlnsfzvw0a9sa"
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 16
+      },
+      "id": 23,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "\n<a href=\"http://192.168.0.38:8080/\" class=\"button\" target=\"_blank\" style=\"display: inline-block; padding: 10px 20px; font-size: 16px; cursor: pointer; text-align: center; text-decoration: none; outline: none; color: #fff; background-color: #f51271; border: none; border-radius: 15px; box-shadow: 0 9px #999;\">Натисніть при відсутності зв'язку</a>\n",
+        "mode": "html"
+      },
+      "pluginVersion": "10.4.2",
+      "title": "Немає зв'язку з центральним офісом Екоцентр",
+      "type": "text"
     },
     {
       "datasource": {
@@ -467,14 +890,19 @@
             {
               "options": {
                 "0": {
-                  "color": "light-red",
-                  "index": 0,
-                  "text": "Проблеми у роботі радіометра"
+                  "color": "semi-dark-green",
+                  "index": 1,
+                  "text": "Контроль"
                 },
                 "1": {
                   "color": "light-blue",
-                  "index": 1,
-                  "text": "Радіометр працює коректно"
+                  "index": 2,
+                  "text": "Режим повірки"
+                },
+                "2": {
+                  "color": "light-red",
+                  "index": 0,
+                  "text": "Проблеми у роботі радіометра"
                 }
               },
               "type": "value"
@@ -497,10 +925,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 10,
-        "x": 7,
-        "y": 6
+        "h": 3,
+        "w": 7,
+        "x": 6,
+        "y": 16
       },
       "id": 22,
       "options": {
@@ -526,7 +954,7 @@
             "type": "influxdb",
             "uid": "adlnsfzvw0a9sa"
           },
-          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_5\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"rad_status\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_6\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"radio_state\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
           "refId": "A"
         }
       ],
@@ -538,303 +966,11 @@
         "type": "influxdb",
         "uid": "adlnsfzvw0a9sa"
       },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "fixed"
-          },
-          "fieldMinMax": false,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 0,
-        "y": 8
-      },
-      "id": 2,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.4.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "adlnsfzvw0a9sa"
-          },
-          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_5\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"current_amount_2\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "A"
-        }
-      ],
-      "title": "Поточне значення №2",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "adlnsfzvw0a9sa"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [
-            {
-              "options": {
-                "1": {
-                  "color": "dark-green",
-                  "index": 0,
-                  "text": "OK"
-                },
-                "2": {
-                  "color": "yellow",
-                  "index": 1,
-                  "text": "Увага"
-                },
-                "3": {
-                  "color": "dark-red",
-                  "index": 2,
-                  "text": "Тривога"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 3,
-        "x": 4,
-        "y": 8
-      },
-      "id": 19,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.4.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "adlnsfzvw0a9sa"
-          },
-          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_5\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"triger_2\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "A"
-        }
-      ],
-      "title": "Стан Датчика №2",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "adlnsfzvw0a9sa"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [
-            {
-              "options": {
-                "1": {
-                  "color": "dark-green",
-                  "index": 0,
-                  "text": "OK"
-                },
-                "2": {
-                  "color": "yellow",
-                  "index": 1,
-                  "text": "Увага"
-                },
-                "3": {
-                  "color": "dark-red",
-                  "index": 2,
-                  "text": "Тривога"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 3,
-        "x": 17,
-        "y": 8
-      },
-      "id": 21,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.4.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "adlnsfzvw0a9sa"
-          },
-          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_5\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"triger_4\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "A"
-        }
-      ],
-      "title": "Стан Датчика №4",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "adlnsfzvw0a9sa"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "fixed"
-          },
-          "fieldMinMax": false,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 20,
-        "y": 8
-      },
-      "id": 17,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.4.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "adlnsfzvw0a9sa"
-          },
-          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_5\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"current_amount_4\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "A"
-        }
-      ],
-      "title": "Поточне значення №4",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "adlnsfzvw0a9sa"
-      },
       "gridPos": {
         "h": 3,
-        "w": 5,
-        "x": 7,
-        "y": 10
+        "w": 4,
+        "x": 13,
+        "y": 16
       },
       "id": 24,
       "options": {
@@ -843,7 +979,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "<a href=\"http://192.168.0.58:5001/stop\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display: inline-block; padding: 8px 16px; font-size: 14px; cursor: pointer; text-align: center; text-decoration: none; outline: none; color: #fff; background-color: #ff0000; border: none; border-radius: 10px; box-shadow: 0 6px #999;\">STOP</a>\r\n<a href=\"http://192.168.0.58:5002/stop\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display: inline-block; padding: 8px 16px; font-size: 14px; cursor: pointer; text-align: center; text-decoration: none; outline: none; color: #000; background-color: #ffff00; border: none; border-radius: 10px; box-shadow: 0 6px #999;\">STOP</a>\r\n",
+        "content": "<a href=\"http://192.168.0.38:8000/stop\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display: inline-block; padding: 8px 16px; font-size: 14px; cursor: pointer; text-align: center; text-decoration: none; outline: none; color: #fff; background-color: #ff0000; border: none; border-radius: 10px; box-shadow: 0 6px #999;\">STOP</a>\r\n",
         "mode": "markdown"
       },
       "pluginVersion": "10.4.2",
@@ -858,8 +994,8 @@
       "gridPos": {
         "h": 3,
         "w": 5,
-        "x": 12,
-        "y": 10
+        "x": 17,
+        "y": 16
       },
       "id": 6,
       "options": {
@@ -868,7 +1004,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "<a href=\"http://192.168.0.23:8000/\" target=\"_blank\" style=\"display: inline-block; padding: 10px 20px; font-size: 16px; cursor: pointer; text-align: center; text-decoration: none; outline: none; color: #fff; background-color: #800080; border: none; border-radius: 15px; box-shadow: 0 9px #999;\">Внесіть виміри</a>\n",
+        "content": "<a href=\"http://192.168.0.23:5000/\" target=\"_blank\" style=\"display: inline-block; padding: 10px 20px; font-size: 16px; cursor: pointer; text-align: center; text-decoration: none; outline: none; color: #fff; background-color: #800080; border: none; border-radius: 15px; box-shadow: 0 9px #999;\">Внесіть виміри</a>\n",
         "mode": "html"
       },
       "pluginVersion": "10.4.2",
@@ -880,167 +1016,94 @@
         "type": "influxdb",
         "uid": "adlnsfzvw0a9sa"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "fixed"
+            "mode": "thresholds"
           },
-          "fieldMinMax": false,
-          "mappings": [],
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "index": 0,
+                  "text": "н/м"
+                },
+                "1": {
+                  "index": 1,
+                  "text": "м/см"
+                }
+              },
+              "type": "value"
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 0,
-        "y": 12
-      },
-      "id": 14,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.4.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "adlnsfzvw0a9sa"
-          },
-          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_5\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"state_amount_2\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "A"
-        }
-      ],
-      "title": "Стале значення фону №2",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "adlnsfzvw0a9sa"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "fixed"
-          },
-          "fieldMinMax": false,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+              },
               {
-                "color": "green",
-                "value": null
+                "color": "red",
+                "value": 80
               }
             ]
-          },
-          "unit": "short"
+          }
         },
         "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 20,
-        "y": 12
-      },
-      "id": 18,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.4.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "adlnsfzvw0a9sa"
-          },
-          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_5\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"state_amount_4\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "A"
-        }
-      ],
-      "title": "Стале значення фону №4",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "adlnsfzvw0a9sa"
       },
       "gridPos": {
         "h": 3,
-        "w": 6,
-        "x": 9,
-        "y": 13
+        "w": 2,
+        "x": 22,
+        "y": 16
       },
-      "id": 23,
+      "id": 25,
       "options": {
-        "code": {
-          "language": "plaintext",
-          "showLineNumbers": false,
-          "showMiniMap": false
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
         },
-        "content": "\n<a href=\"http://192.168.0.58:5000/\" class=\"button\" target=\"_blank\" style=\"display: inline-block; padding: 10px 20px; font-size: 16px; cursor: pointer; text-align: center; text-decoration: none; outline: none; color: #fff; background-color: #f51271; border: none; border-radius: 15px; box-shadow: 0 9px #999;\">Натисніть при відсутності зв'язку</a>\n",
-        "mode": "html"
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
       "pluginVersion": "10.4.2",
-      "title": "Немає зв'язку з центральним офісом Екоцентр",
-      "type": "text"
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "adlnsfzvw0a9sa"
+          },
+          "query": "from(bucket: \"Graf\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"test_6\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"lamda\")\r\n  |> filter(fn: (r) => r[\"host\"] == \"host3\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Одиниці вим.",
+      "type": "stat"
     }
   ],
-  "refresh": "",
+  "refresh": "auto",
   "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "2024-06-09T21:00:00.000Z",
-    "to": "2024-06-12T20:59:59.000Z"
+    "from": "now-5m",
+    "to": "now"
   },
   "timepicker": {},
-  "timezone": "browser",
+  "timezone": "",
   "title": "ARM 3",
   "uid": "ddlsl1eunjugwd1",
-  "version": 24,
+  "version": 54,
   "weekStart": ""
 }
