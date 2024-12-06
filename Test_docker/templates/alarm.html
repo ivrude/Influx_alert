@@ -36,21 +36,12 @@
         nav a:hover {
             text-decoration: underline;
         }
-        footer {
-            background-color: #004d40; /* дуже темний зелений */
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
         h1 {
             margin: 20px;
         }
         .container {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             flex-wrap: wrap;
             gap: 10px;
         }
@@ -160,14 +151,26 @@ setInterval(updateTriggers, 60000); // 60000 мс = 1 хвилина
         Датчики КДП "Дитятки"
         </header>
     <nav>
-        <a href="http://188.93.118.27:3000/">Grafana</a>
+        <a href="http://188.93.118.27:3000/"><-Повернутись на головну сторінку</a>
     </nav>
-    <div class="container-1">
-        <div class="square {% if triggers['trigger_e1'] == 0 %}green{% elif triggers['trigger_e1'] == 1 %}red{% else %}grey{% endif %}">БД1<br>{% if triggers['trigger_e1'] == 0 %}OK{% elif triggers['trigger_e1'] == 1 %}Небезпека{% else %}No Data{% endif %}</div>
-        <div class="square {% if triggers['trigger_e2'] == 0 %}green{% elif triggers['trigger_e2'] == 1 %}red{% else %}grey{% endif %}">БД2<br>{% if triggers['trigger_e2'] == 0 %}OK{% elif triggers['trigger_e2'] == 1 %}Небезпека{% else %}No Data{% endif %}</div>
-        <div class="square {% if triggers['trigger_e3'] == 0 %}green{% elif triggers['trigger_e3'] == 1 %}red{% else %}grey{% endif %}">БД3<br>{% if triggers['trigger_e3'] == 0 %}OK{% elif triggers['trigger_e3'] == 1 %}Небезпека{% else %}No Data{% endif %}</div>
-        <div class="square {% if triggers['trigger_e4'] == 0 %}green{% elif triggers['trigger_e4'] == 1 %}red{% else %}grey{% endif %}">БД4<br>{% if triggers['trigger_e4'] == 0 %}OK{% elif triggers['trigger_e4'] == 1 %}Небезпека{% else %}No Data{% endif %}</div>
+    <div class="container">
+    <div class="column">
+        <div class="square {% if triggers['trigger_e3'] == 0 %}green{% elif triggers['trigger_e3'] == 1 %}red{% else %}grey{% endif %}">
+            БД3<br>{% if triggers['trigger_e3'] == 0 %}OK{% elif triggers['trigger_e3'] == 1 %}Небезпека{% else %}No Data{% endif %}
+        </div>
+        <div class="square {% if triggers['trigger_e1'] == 0 %}green{% elif triggers['trigger_e1'] == 1 %}red{% else %}grey{% endif %}">
+            БД1<br>{% if triggers['trigger_e1'] == 0 %}OK{% elif triggers['trigger_e1'] == 1 %}Небезпека{% else %}No Data{% endif %}
+        </div>
     </div>
+    <div class="column">
+        <div class="square {% if triggers['trigger_e4'] == 0 %}green{% elif triggers['trigger_e4'] == 1 %}red{% else %}grey{% endif %}">
+            БД4<br>{% if triggers['trigger_e4'] == 0 %}OK{% elif triggers['trigger_e4'] == 1 %}Небезпека{% else %}No Data{% endif %}
+        </div>
+        <div class="square {% if triggers['trigger_e2'] == 0 %}green{% elif triggers['trigger_e2'] == 1 %}red{% else %}grey{% endif %}">
+            БД2<br>{% if triggers['trigger_e2'] == 0 %}OK{% elif triggers['trigger_e2'] == 1 %}Небезпека{% else %}No Data{% endif %}
+        </div>
+    </div>
+</div>
     <div class="button-container">
         <div class="striped-square">
             <button class="stop-button" onclick="stopMusic()">Stop</button>
