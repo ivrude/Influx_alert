@@ -29,18 +29,9 @@ def process_table(triggers, conn, table_name, prefix):
     if last_record:
         # Assuming the columns have indices for current_amounts and state_amounts
         triger_state = last_record[8:12]
-        sumar = sum(triger_state)
         for i in range(1, 5):
-            if sumar > 1:
-                if triger_state[i - 1] == 0:
-                    triggers[f"{prefix}{i}"] = triger_state[i - 1]
-                else:
-                    triggers[f"{prefix}{i}"] = 2
-            else:
-                triggers[f"{prefix}{i}"] = triger_state[i - 1]
+            triggers[f"{prefix}{i}"] = triger_state[i - 1]
         for i in range(1, 5):
-            if triger_state[i - 1] == 2:
-                responce = requests.post("http://192.168.0.36:8000/webhook2")
             if triger_state[i - 1] == 1:
                 responce = requests.post("http://192.168.0.36:8000/webhook1")
 
@@ -51,8 +42,6 @@ def index():
     conn = get_db_connection()
     try:
         for table in ["host3"]:
-            process_table(triggers, conn, table, "trigger_")
-        for table in ["host3_e"]:
             process_table(triggers, conn, table, "trigger_e")
     finally:
         conn.close()  # Ensure the connection is closed after use
