@@ -16,7 +16,10 @@ write_api = client.write_api(write_options=ASYNCHRONOUS)
 
 # Write to InfluxDB
 def zapis(name, value):
-    data = f"test_6,host=host3 {name}={value}"
+    if value.isdigit():  # Якщо це числове значення
+        data = f"test_6,host=host3 {name}={value}"
+    else:  # Якщо це текстове значення
+        data = f'test_6,host=host3 {name}="{value}"'
     write_api.write(bucket=BUCKET, org=ORG, record=data)
 
 # Main page with table
