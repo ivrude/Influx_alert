@@ -18,6 +18,10 @@
         th {
             background-color: #f2f2f2;
         }
+        td:first-child {
+            font-weight: bold;
+            background-color: #eaeaea;
+        }
     </style>
 </head>
 <body>
@@ -25,12 +29,20 @@
     <form action="/" method="POST">
         <table>
             <tr>
-                <th>Fon</th>
+                <th>Field</th>
                 <th>Value</th>
             </tr>
             <tr>
-                <td><input type="text" name="name" required placeholder="beta"></td>
-                <td><input type="float" name="value" required></td>
+                <td>Кузов</td>
+                <td><input type="float" name="body" required></td>
+            </tr>
+            <tr>
+                <td>Колеса</td>
+                <td><input type="float" name="wheels" required></td>
+            </tr>
+            <tr>
+                <td>Дно машини</td>
+                <td><input type="float" name="bottom" required></td>
             </tr>
         </table>
         <div style="text-align: center; margin-top: 20px;">
