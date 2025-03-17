@@ -86,7 +86,7 @@ def resend_cached_data():
 
 
 # connect to local db
-conn = sqlite3.connect("Test_docker/Test.db")
+conn = sqlite3.connect("./Test.db")
 cursor = conn.cursor()
 
 # Список таблиць для обробки
@@ -98,18 +98,18 @@ tables = ["host3"]
 while True:
     for table in tables:
         last_record = get_last_record(cursor, table)
-        radio_state = last_record[12]
+        radio_state = last_record[13]
         if radio_state == 0:
             if last_record:
-                current_amounts = last_record[:4]
-                state_amounts = last_record[4:8]
-                triger_state = last_record[8:12]
-                lamda = last_record[13]
+                current_amounts = last_record[1:5]
+                state_amounts = last_record[5:9]
+                triger_state = last_record[9:13]
+                #lamda = last_record[14]
                 timestamp = datetime.datetime.utcnow() + datetime.timedelta(
                     hours=2
                 )  # Adjusting for UTC+3
                 zapis("radio_state", radio_state, table, timestamp)
-                zapis("lamda", lamda, table, timestamp)
+                #zapis("lamda", lamda, table, timestamp)
                 for i, value in enumerate(current_amounts, start=1):
                     zapis(f"current_amount_{i}", float(value), table, timestamp)
                 for i, value in enumerate(state_amounts, start=1):
