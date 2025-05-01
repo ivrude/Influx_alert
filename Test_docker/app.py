@@ -49,7 +49,7 @@ cursor = conn.cursor()
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('alarm.html')
 
 @app.route('/latest_data')
 def latest_data():
