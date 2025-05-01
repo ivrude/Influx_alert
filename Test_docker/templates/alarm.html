@@ -1,180 +1,182 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trigger States</title>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <title>Моніторинг</title>
     <style>
-        body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #e0f7fa, #80deea, #b2ebf2);
-        color: #333;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-         header {
-            background-color: #00796b; /* темно-зелений */
+        html, body {
+            height: 100vh;
+            width: 100vw;
+            background-color: #222;
             color: white;
+            font-family: Arial, sans-serif;
+            font-size: 30pt;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        table {
+            width: 100%;
+            height: 100%;
             text-align: center;
-            padding: 20px;
-            font-size: 24px;
+            position: relative;
         }
-        nav {
-            display: flex;
-            justify-content: center;
-            background-color: #004d40; /* дуже темний зелений */
-            padding: 10px;
+        .green_block {
+            background-color: #4CAF50;
+            position: relative;
         }
-        nav a {
+        .red_block {
+            background-color: #FF0000 !important;
             color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 18px;
         }
-        nav a:hover {
-            text-decoration: underline;
+        .gray_block {
+            background-color: #666;
+            position: relative;
         }
-        h1 {
-            margin: 20px;
-        }
-        .container {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .square {
-            width: 100px;
-            height: 100px;
-            margin: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
+        .title {
+            font-size: 14pt;
             font-weight: bold;
-            color: white;
-            text-align: center;
+            color: #fff;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 10px;
         }
-        .square.green {
-    background: linear-gradient(45deg, #4caf50 0%, #388e3c 100%);
-}
-
-.square.yellow {
-    background: linear-gradient(45deg, #ffeb3b 0%, #fbc02d 100%);
-}
-
-.square.red {
-    background: linear-gradient(45deg, #f44336 0%, #c62828 100%);
-}
-
-.square.grey {
-    background: linear-gradient(45deg, #9e9e9e 0%, #616161 100%);
-}
-
-        .button-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .striped-square {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, yellow 25%, black 25%, black 50%, yellow 50%, yellow 75%, black 75%, black 100%);
-            background-size: 20px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .stop-button {
-            width: 80px;
-            height: 80px;
-            border: none;
-            border-radius: 50%;
-            background-color: red;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-transform: uppercase;
+        td {
+            padding-top: 40px;
         }
     </style>
     <script>
-        function stopMusic() {
-            const urls = [
-                'http://192.168.0.150:8000/stop',
-            ];
-            urls.forEach(url => {
-                fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        console.log(`Request to ${url} succeeded.`);
-                    } else {
-                        console.log(`Request to ${url} failed.`);
-                    }
-                })
-                .catch(error => {
-                    console.error(`Error with request to ${url}:`, error);
-                });
-            });
-        }
-    function updateTriggers() {
-    fetch('/')
-        .then(response => response.text())
-        .then(html => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const newContent = doc.querySelector('.container');
-            document.querySelector('.container').innerHTML = newContent.innerHTML;
-        })
-        .catch(error => {
-            console.error('Error updating triggers:', error);
-        });
-}
+        function updateData() {
+        fetch('/latest_data')
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    updateCell("current_amount_1", data.curent_amount_1);
+                    updateCell("current_amount_2", data.curent_amount_2);
+                    updateCell("current_amount_3", data.curent_amount_3);
+                    updateCell("current_amount_4", data.curent_amount_4);
 
-// Запускаємо оновлення раз на хвилину
-setInterval(updateTriggers, 60000); // 60000 мс = 1 хвилина
+                    updateCell("state_amount_1", data.state_amount_1);
+                    updateCell("state_amount_2", data.state_amount_2);
+                    updateCell("state_amount_3", data.state_amount_3);
+                    updateCell("state_amount_4", data.state_amount_4);
+
+                    updateTrigger("triger_1", data.triger_1);
+                    updateTrigger("triger_2", data.triger_2);
+                    updateTrigger("triger_3", data.triger_3);
+                    updateTrigger("triger_4", data.triger_4);
+
+                    updateRadiometer("radiometr_state", data.radiometr_state);
+                }
+            })
+            .catch(error => console.error('Помилка отримання даних:', error));
+    }
+
+    function updateCell(id, value) {
+        document.getElementById(id).innerText = value.toFixed(2);
+    }
+
+    function updateTrigger(id, value) {
+        let cell = document.getElementById(id).parentElement;
+        if (value == 1) {
+            cell.style.backgroundColor = "red";
+            document.getElementById(id).innerText = "Тривога";
+        } else {
+            cell.style.backgroundColor = "#4CAF50"; // зелений
+            document.getElementById(id).innerText = `БД ${id.replace("triger_", "")}`;
+        }
+    }
+
+    function updateRadiometer(id, value) {
+        let cell = document.getElementById(id).parentElement;
+        if (value == 1) {
+            cell.style.backgroundColor = "red";
+            document.getElementById(id).innerText = "Помилка";
+        } else {
+            cell.style.backgroundColor = "#4CAF50"; // зелений
+            document.getElementById(id).innerText = `Норма`;
+        }
+    }
+
+    setInterval(updateData, 1000);
+    window.onload = updateData;
 
     </script>
 </head>
 <body>
-        <header>
-        Датчики КДП "Дитятки"
-        </header>
-    <nav>
-        <a href="http://192.168.0.150:3000/"><-Повернутись на головну сторінку</a>
-    </nav>
-    <div class="container">
-    <div class="column">
-        <div class="square {% if triggers['trigger_e3'] == 0 %}green{% elif triggers['trigger_e3'] == 1 %}red{% else %}grey{% endif %}">
-            БД3<br>{% if triggers['trigger_e3'] == 0 %}OK{% elif triggers['trigger_e3'] == 1 %}Небезпека{% else %}No Data{% endif %}
-        </div>
-        <div class="square {% if triggers['trigger_e1'] == 0 %}green{% elif triggers['trigger_e1'] == 1 %}red{% else %}grey{% endif %}">
-            БД1<br>{% if triggers['trigger_e1'] == 0 %}OK{% elif triggers['trigger_e1'] == 1 %}Небезпека{% else %}No Data{% endif %}
-        </div>
-    </div>
-    <div class="column">
-        <div class="square {% if triggers['trigger_e4'] == 0 %}green{% elif triggers['trigger_e4'] == 1 %}red{% else %}grey{% endif %}">
-            БД4<br>{% if triggers['trigger_e4'] == 0 %}OK{% elif triggers['trigger_e4'] == 1 %}Небезпека{% else %}No Data{% endif %}
-        </div>
-        <div class="square {% if triggers['trigger_e2'] == 0 %}green{% elif triggers['trigger_e2'] == 1 %}red{% else %}grey{% endif %}">
-            БД2<br>{% if triggers['trigger_e2'] == 0 %}OK{% elif triggers['trigger_e2'] == 1 %}Небезпека{% else %}No Data{% endif %}
-        </div>
-    </div>
-</div>
-    <div class="button-container">
-        <div class="striped-square">
-            <button class="stop-button" onclick="stopMusic()">Stop</button>
-        </div>
-    </div>
+    <table width="100%" height="100%">
+        <tr>
+            <td style="width: 15%" class="gray_block">
+                <div class="title">Поточне значення 1</div>
+                <div id="current_amount_1"></div>
+            </td>
+            <td style="width: 10%" rowspan="2" class="green_block" id="triger_1_cell">
+                <div class="title">Стан датчика 1</div>
+                <div id="triger_1"></div>
+            </td>
+            <td style="width: 50%" rowspan="3">
+                <div class="title">Камера</div>
+                <iframe id="camera_feed" src="http://192.168.2.230:81/" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
+            </td>
+            <td style="width: 10%" rowspan="2" class="green_block" id="triger_3_cell">
+                <div class="title">Стан датчика 3</div>
+                <div id="triger_3"></div>
+            </td>
+            <td style="width: 15%" class="gray_block">
+                <div class="title">Поточне значення 3</div>
+                <div id="current_amount_2"></div>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 15%" class="gray_block">
+                <div class="title">Стале значення фону 1</div>
+                <div id="state_amount_1"></div>
+            </td>
+            <td style="width: 15%" class="gray_block">
+                <div class="title">Стале значення фону 3</div>
+                <div id="state_amount_2"></div>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 15%" class="gray_block">
+                <div class="title">Поточне значення 2</div>
+                <div id="current_amount_3"></div>
+            </td>
+            <td style="width: 10%" rowspan="2" class="green_block" id="triger_2_cell">
+                <div class="title">Стан датчика 2</div>
+                <div id="triger_2"></div>
+            </td>
+            <td style="width: 10%" rowspan="2" class="green_block" id="triger_4_cell">
+                <div class="title">Стан датчика 4</div>
+                <div id="triger_4"></div>
+            </td>
+            <td style="width: 15%" class="gray_block">
+                <div class="title">Поточне значення 4</div>
+                <div id="current_amount_4"></div>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 15%" class="gray_block">
+                <div class="title">Стале значення фону 2</div>
+                <div id="state_amount_3"></div>
+            </td>
+            <td style="width: 50%" class="green_block">
+                <div class="title">Статус радіометра</div>
+                <div id="radiometr_state"></div>
+            </td>
+            <td style="width: 15%" class="gray_block">
+                <div class="title">Стале значення фону 4</div>
+                <div id="state_amount_4"></div>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
