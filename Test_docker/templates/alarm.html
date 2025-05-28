@@ -79,6 +79,18 @@
             })
             .catch(error => console.error('Помилка отримання даних:', error));
     }
+    function sendAlert(ip, payload) {
+    fetch(`http://${ip}/webhook2`, {
+        method: 'GET',
+    })
+    .then(response => {
+        if (!response.ok) {
+            console.error('POST-запит не вдався:', response.statusText);
+        }
+    })
+    .catch(error => console.error('Помилка POST-запиту:', error));
+}
+
 
     function updateCell(id, value) {
         document.getElementById(id).innerText = value.toFixed(2);
@@ -89,6 +101,7 @@
         if (value == 1) {
             cell.style.backgroundColor = "red";
             document.getElementById(id).innerText = "Тривога";
+            sendAlert('192.168.0.43:8000', { sensor: id, status: 'alarm' });
         } else {
             cell.style.backgroundColor = "#4CAF50"; // зелений
             document.getElementById(id).innerText = `БД ${id.replace("triger_", "")}`;
@@ -100,6 +113,7 @@
         if (value == 1) {
             cell.style.backgroundColor = "red";
             document.getElementById(id).innerText = "Помилка";
+            sendAlert('192.168.0.43:8000', { device: 'radiometer', status: 'error' });
         } else {
             cell.style.backgroundColor = "#4CAF50"; // зелений
             document.getElementById(id).innerText = `Норма`;
